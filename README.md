@@ -1,4 +1,6 @@
-# namefull.github.io
+# demo
+https://namefull.github.io
+
 namefull--一个随机单词生成器
 
 让你无需再为新项目取名而头痛欲裂！

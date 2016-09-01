@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="format-detection" content="telephone=no">
+
+<title>NameFull-随机英文单词生成器</title>
+<style>@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300,700);
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #3f3f3f;
+}
+body.isword h1,
+body.isword h2 {
+    color: #1abc9c;
+}
+body.isword button {
+    background-color: #1abc9c;
+}
+body.isword button:hover,
+body.isword button:active {
+    background-color: #1dd2af;
+}
+body.isword #charlist li {
+    color: #1abc9c;
+    background-color: #f1fdfb;
+}
+body.isword #charlist li:nth-child(odd) {
+    background-color: #dbfaf4;
+}
+body.isnotword h1,
+body.isnotword h2 {
+    color: #bc1a3a;
+}
+body.isnotword button {
+    background-color: #bc1a3a;
+}
+body.isnotword button:hover,
+body.isnotword button:active {
+    background-color: #d21d41;
+}
+body.isnotword #charlist li {
+    color: #bc1a3a;
+    background-color: #fdf1f4;
+}
+body.isnotword #charlist li:nth-child(odd) {
+    background-color: #fadbe1;
+}
+main {
+    width: 100%;
+    margin: 0 auto;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 1em;
+}
+main .description {
+    bottom: 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 60%;
+    font-size: 0.875em;
+    margin: 4em auto 0;
+    min-width: 420px;
+}
+aside {
+    width: 20%;
+    position: fixed;
+    top: 0;
+    right: -15%;
+    bottom: 0;
+    opacity: 0.2;
+    -webkit-transition: right 400ms ease-in-out, opacity 400ms ease-in-out;
+    transition: right 400ms ease-in-out, opacity 400ms ease-in-out;
+    cursor: pointer;
+    background-color: #3f3f3f;
+    color: #fff;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: scroll;
+}
+aside:hover {
+    right: 0;
+    opacity: 1;
+}
+aside #history {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+aside #history li {
+    padding: 4px 12px;
+}
+aside #history li.isword {
+    background-color: #1abc9c;
+}
+aside #history li.isnotword {
+    background-color: #bc1a3a;
+}
+button {
+    -webkit-appearance: none;
+    font-size: 1.4em;
+    background-color: #3f3f3f;
+    color: #fff;
+    border: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    padding: 0.5em 1em;
+}
+button:hover,
+button:active {
+    background-color: #4c4c4c;
+}
+.word-main {
+    text-align: center;
+    margin-top: 2em;
+}
+h1,
+h2 {
+    margin: 0;
+    text-align: center;
+}
+h1 {
+    font-weight: 700;
+    font-size: 4em;
+}
+h2 {
+    font-size: 2em;
+    font-weight: 300;
+}
+h3 {
+    font-size: 1.4em;
+    margin: 0;
+    font-weight: 700;
+}
+h4 {
+    font-weight: 700;
+}
+p {
+    margin: 0.5em 0 0;
+    line-height: 1.4;
+}
+#charlist {
+    display: table;
+    width: 50%;
+    max-width: 1140px;
+    min-width: 300px;
+    height: 120px;
+    margin: 2em auto;
+    line-height: 1.4;
+    padding: 0;
+}
+#charlist li {
+    display: table-cell;
+    font-size: 0.875em;
+    height: 60px;
+    width: 60px;
+    vertical-align: middle;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #1abc9c;
+    background-color: #f1fdfb;
+    padding: 0.25em 0.5em;
+    opacity: 0;
+    -webkit-animation: letter 200ms forwards;
+    animation: letter 200ms forwards;
+}
+#charlist li:nth-child(odd) {
+    background-color: #dbfaf4;
+}
+#charlist li:nth-child(1) {
+    -webkit-animation-delay: 50ms;
+    animation-delay: 50ms;
+}
+#charlist li:nth-child(2) {
+    -webkit-animation-delay: 100ms;
+    animation-delay: 100ms;
+}
+#charlist li:nth-child(3) {
+    -webkit-animation-delay: 150ms;
+    animation-delay: 150ms;
+}
+#charlist li:nth-child(4) {
+    -webkit-animation-delay: 200ms;
+    animation-delay: 200ms;
+}
+#charlist li:nth-child(5) {
+    -webkit-animation-delay: 250ms;
+    animation-delay: 250ms;
+}
+#charlist li:nth-child(6) {
+    -webkit-animation-delay: 300ms;
+    animation-delay: 300ms;
+}
+#charlist li:nth-child(7) {
+    -webkit-animation-delay: 350ms;
+    animation-delay: 350ms;
+}
+#charlist li:nth-child(8) {
+    -webkit-animation-delay: 400ms;
+    animation-delay: 400ms;
+}
+#charlist li:nth-child(9) {
+    -webkit-animation-delay: 450ms;
+    animation-delay: 450ms;
+}
+#charlist li:nth-child(10) {
+    -webkit-animation-delay: 500ms;
+    animation-delay: 500ms;
+}
+#charlist li:nth-child(11) {
+    -webkit-animation-delay: 550ms;
+    animation-delay: 550ms;
+}
+#charlist li:nth-child(12) {
+    -webkit-animation-delay: 600ms;
+    animation-delay: 600ms;
+}
+#charlist li:nth-child(13) {
+    -webkit-animation-delay: 650ms;
+    animation-delay: 650ms;
+}
+#charlist li:nth-child(14) {
+    -webkit-animation-delay: 700ms;
+    animation-delay: 700ms;
+}
+#charlist li:nth-child(15) {
+    -webkit-animation-delay: 750ms;
+    animation-delay: 750ms;
+}
+#charlist li:nth-child(16) {
+    -webkit-animation-delay: 800ms;
+    animation-delay: 800ms;
+}
+#charlist li:nth-child(17) {
+    -webkit-animation-delay: 850ms;
+    animation-delay: 850ms;
+}
+#charlist li:nth-child(18) {
+    -webkit-animation-delay: 900ms;
+    animation-delay: 900ms;
+}
+#charlist li:nth-child(19) {
+    -webkit-animation-delay: 950ms;
+    animation-delay: 950ms;
+}
+#charlist li span {
+    display: block;
+}
+#charlist li .char {
+    font-weight: 700;
+}
+#charlist li .charchance {
+    font-weight: 300;
+}
+@-webkit-keyframes letter {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes letter {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}</style><script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8c68efa3648cdc01a3d8333e0becf3c7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+	</head>
+	<body>
+	<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<main>
+    <div class="word-main">
+        <h1 id="word"></h1>
+        <h2><span id="length"></span></h2>
+        <ul id="charlist"></ul>
+        <button id="new_word">New</button>
+    </div>
+    <div class="description">
+        <h3>Random "Word" Generation</h3>
+        <p>First, a random word length is generated based on the frequency with which any word length from 1-19 occurs in the English language. Letters are then generated based on the frequency with which they appear in the English language.</p>
+        <p>There are NO relative factors in the calculation (a one letter word needing to be a vowel, it being impossible for the same letter to appear 3 or more times in a row, or letters appearing more frequently next to other letters). This is simply
+            to demonstrate the probability of English words being formed randomly based on their presence in the English language.</p>
+        <p>Beneath the word is its character count and the frequency of that word length in the English language. Beneath that is the breakdown for each letter with the frequency of that letter's occurance in the English language.</p>
+
+        <h4>If you manage to randomly generate an actual word, be sure to throw it in the comments as it is a fairly rare occurance!</h4>
+    </div>
+</main>
+
+<aside>
+    <ul id="history"></ul>
+</aside>
+<script>(function() {
+    var dict, randomAtoZ, randomWord, randomWordLength, word_history, wordfreq, writeWord;
+    dict = [];
+    $.get('https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/dictionary.txt', function(txt) {
+        var i, words;
+        words = txt.split('\n');
+        i = 0;
+        while (i < words.length) {
+            dict.push(words[i]);
+            i++;
+        }
+        writeWord(randomWord());
+    });
+    randomAtoZ = function(lookup) {
+        return function() {
+            var chance, char, charfreq, prev, random;
+            random = Math.random() * 100000;
+            char = void 0;
+            prev = 0;
+            for (char in lookup) {
+                charfreq = lookup[char];
+                chance = (charfreq - prev) / 1000 + '%';
+                if (random < charfreq) {
+                    return {
+                        char: char,
+                        charfreq: charfreq,
+                        chance: chance
+                    };
+                }
+                prev = charfreq;
+            }
+        };
+    }({
+        a: 8167,
+        b: 9659,
+        c: 12441,
+        d: 16694,
+        e: 29396,
+        f: 31624,
+        g: 33639,
+        h: 39733,
+        i: 46699,
+        j: 46852,
+        k: 47624,
+        l: 51649,
+        m: 54055,
+        n: 60804,
+        o: 68311,
+        p: 70240,
+        q: 70335,
+        r: 76322,
+        s: 82649,
+        t: 91705,
+        u: 94463,
+        v: 95441,
+        w: 97801,
+        x: 97951,
+        y: 99925,
+        z: 100000
+    });
+    wordfreq = [];
+    randomWordLength = function() {
+        var amount, chance, length, lengthfreq, lookup, percent, percentages, prev, random, total, _i, _len;
+        total = 0;
+        percentages = [
+            0.1,
+            0.6,
+            2.6,
+            5.2,
+            8.5,
+            12.2,
+            14,
+            14,
+            12.6,
+            10.1,
+            7.5,
+            5.2,
+            3.2,
+            2,
+            1,
+            0.6,
+            0.3,
+            0.2,
+            0.1
+        ];
+        for (_i = 0, _len = percentages.length; _i < _len; _i++) {
+            percent = percentages[_i];
+            amount = total + percent / 100 * 100000;
+            wordfreq.push(amount);
+            total = amount;
+        }
+        random = Math.random() * 100000;
+        length = void 0;
+        lookup = {
+            1: wordfreq[0],
+            2: wordfreq[1],
+            3: wordfreq[2],
+            4: wordfreq[3],
+            5: wordfreq[4],
+            6: wordfreq[5],
+            7: wordfreq[6],
+            8: wordfreq[7],
+            9: wordfreq[8],
+            10: wordfreq[9],
+            11: wordfreq[10],
+            12: wordfreq[11],
+            13: wordfreq[12],
+            14: wordfreq[13],
+            15: wordfreq[14],
+            16: wordfreq[15],
+            17: wordfreq[16],
+            18: wordfreq[17],
+            19: wordfreq[18]
+        };
+        prev = 0;
+        for (length in lookup) {
+            lengthfreq = lookup[length];
+            chance = Math.round(lengthfreq - prev) / 1000 + '%';
+            if (random < lengthfreq) {
+                return {
+                    length: length,
+                    chance: chance
+                };
+            }
+            prev = lengthfreq;
+        }
+    };
+    randomWord = function() {
+        var chance, char_map, character, i, isword, length, length_i, word, _i;
+        length = randomWordLength();
+        length_i = length.length;
+        chance = length.chance;
+        word = '';
+        char_map = [];
+        for (i = _i = 1; 1 <= length_i ? _i <= length_i : _i >= length_i; i = 1 <= length_i ? ++_i : --_i) {
+            character = randomAtoZ();
+            word += character.char;
+            char_map.push(character);
+        }
+        if ($.inArray(word, dict) > -1) {
+            alert('"' + word + '" is a word in the dictionary. Congrats.');
+            isword = true;
+        } else {
+            isword = false;
+        }
+        return {
+            length_i: length_i,
+            chance: chance,
+            word: word,
+            isword: isword,
+            char_map: char_map
+        };
+    };
+    word_history = [];
+    writeWord = function(generated_word) {
+        var char, charlist, charlist_html, history_string, isword, length, w, word, _i, _j, _len, _len1, _ref;
+        document.getElementsByTagName('body')[0].className = '';
+        if (generated_word.isword === true) {
+            isword = 'isword';
+        } else {
+            isword = 'isnotword';
+        }
+        word = document.getElementById('word');
+        word.innerHTML = generated_word.word;
+        document.getElementsByTagName('body')[0].className = isword;
+        length = document.getElementById('length');
+        length.innerHTML = generated_word.length_i + ' (' + generated_word.chance + ')';
+        charlist = document.getElementById('charlist');
+        charlist_html = '';
+        _ref = generated_word.char_map;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            char = _ref[_i];
+            charlist_html += '<li><span class="char">' + char.char + '</span> <span class="charchance">' + char.chance + '</span></li>';
+        }
+        charlist.innerHTML = charlist_html;
+        word_history.unshift({
+            word: generated_word.word,
+            isword: generated_word.isword
+        });
+        history_string = '';
+        for (_j = 0, _len1 = word_history.length; _j < _len1; _j++) {
+            w = word_history[_j];
+            if (w.isword === true) {
+                isword = 'isword';
+            } else {
+                isword = 'isnotword';
+            }
+            history_string += '<li class="' + isword + '">' + w.word + '</li>';
+        }
+        return document.getElementById('history').innerHTML = history_string;
+    };
+    document.getElementById('new_word').onclick = function() {
+        return writeWord(randomWord());
+    };
+}.call(this));</script></body></html>
